@@ -1,31 +1,40 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+const path = require('path');
 
 module.exports = {
   mode: 'development',
   entry: './src/index.js',
   output: {
     filename: 'bundle.[hash].js',
+    path: path.resolve(__dirname, 'docs'),
   },
   module: {
     rules: [
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        loader: 'babel-loader',
-      options: {
-        presets: [
-          [
-            '@babel/preset-env', 
-            {
-               targets: { 
-                ie: 11
-              },
-            }
-          ],
-          '@babel/preset-react', 
-        ],
-      },
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: [
+              [
+                "@babel/preset-env",
+                {
+                  targets: {
+                    ie: "11",
+                  },
+                },
+              ],
+              "@babel/preset-react",
+            ],
+            plugins: [
+              require("@babel/plugin-transform-async-to-generator"),
+              require("@babel/plugin-transform-arrow-functions"),
+              require("@babel/plugin-transform-modules-commonjs"),
+            ],
+          }
+        }
       },
 
       {
@@ -47,3 +56,26 @@ module.exports = {
     }),
   ],
 };
+
+
+
+// {
+//   test: /\.(js|jsx)$/,
+//   exclude: /node_modules/,
+//   use: {
+//     loader: "babel-loader",
+//     options: {
+//       presets: [
+//         [
+//           "@babel/preset-env",
+//           {
+//             targets: {
+//               ie: "11",
+//             },
+//           },
+//         ],
+//         "@babel/preset-react",
+//       ],
+//       plugins: [
+//         require("@babel/plugin-transform-async-to-generator"),
+      

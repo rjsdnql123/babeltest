@@ -1,7 +1,7 @@
 import React from 'react';
-const App = () => (
+const SADFASDFSADF = () => (
   <div>
     Babel, Webpack
   </div>
 );
-export default App;
+export default SADFASDFSADF;
